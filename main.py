@@ -54,10 +54,20 @@ def main():
     rev_button.click()
 
 
-    # time.sleep(60)
+    ########### HORARIO
+
+    # time.sleep(40)
+
+    dia = 'martes'
+    h1 = '19:00'
+    h2 = '19:30'
+
+    #########################
 
     start2 = datetime.datetime.now()
     print(f'\n\nStar2: {datetime.datetime.now().strftime("%H:%M:%S")}\n\n')
+
+    start_time = time.time()
 
 # Mover hasta el martes siguiente
     fecha = driver.find_element_by_id('fechaTabla')
@@ -72,7 +82,10 @@ def main():
     manana.click()
     print(fecha.get_property("value"))
 
-    while 'lunes' not in fecha.get_property("value").lower():
+
+
+
+    while dia not in fecha.get_property("value").lower():
         time.sleep(2)
         manana.click()
 
@@ -80,42 +93,62 @@ def main():
     cuerpotabla = driver.find_element_by_id('CuerpoTabla')
     print(cuerpotabla.get_attribute("time"))
 
+    print("click dias--- %s seconds ---" % (time.time() - start_time))
+
+    start_time = time.time()
 # coger los horarios que queremos
     reser = driver.find_elements_by_class_name('subDivision.plantilla.buttonHora')
 
-    h1 = '18:00'
-    h2 = '18:30'
-    pista_h1 = []
+    # pista_h1 = []
+    #
+    # for x in reser:
+    #     if x.get_attribute("time") == h1:
+    #         pista_h1.append(x)
+    #
+    # for x in reser:
+    #     if x.get_attribute("time") == h2:
+    #         pista_h1.append(x)
 
-    for x in reser:
-        if x.get_attribute("time") == h1:
-            pista_h1.append(x)
+    pista_h1 = [x for x in reser if x.get_attribute("time") == h1 or x.get_attribute("time") == h2]
 
-    for x in reser:
-        if x.get_attribute("time") == h2:
-            pista_h1.append(x)
+    # pista_h1 = list(filter(lambda x: x.get_attribute("time") == h1 or x.get_attribute("time") == h2 , reser))
 
+    print("foor--- %s seconds ---" % (time.time() - start_time))
 
 # primero h1 pistas 4, 5 y 6 y luego h2 pistas 4, 5 y 6 primero.
 
-    # pista_h1.insert(0 , pista_h1.pop(3))
-    # pista_h1.insert(1 , pista_h1.pop(4))
-    # pista_h1.insert(2 , pista_h1.pop(5))
+    # SOL
+
+    # pista_h1.insert(0 , pista_h1.pop(6))
+    # pista_h1.insert(1 , pista_h1.pop(8))
+    # pista_h1.insert(2 , pista_h1.pop(10))
     #
-    # pista_h1.insert(6 , pista_h1.pop(9))
-    # pista_h1.insert(7 , pista_h1.pop(10))
-    # pista_h1.insert(8 , pista_h1.pop(11))
+    # pista_h1.insert(11 , pista_h1.pop(4))
+    # pista_h1.insert(11 , pista_h1.pop(5))
+    # pista_h1.insert(11 , pista_h1.pop(6))
+
+
 
 # pistas 1, 2 y 3 primero de distinto horario
+#     start_time2 = time.time()
+    # LLUVIA
 
-    pista_h1.insert(3 , pista_h1.pop(6))
-    pista_h1.insert(4 , pista_h1.pop(7))
-    pista_h1.insert(5 , pista_h1.pop(8))
+    pista_h1.insert(11 , pista_h1.pop(7))
+    pista_h1.insert(11 , pista_h1.pop(8))
+    pista_h1.insert(11 , pista_h1.pop(9))
 
-    for x in pista_h1:
-        print(f'{x.get_attribute("time")} {x.get_attribute("columna")}')
+    pista_h1.insert(5 , pista_h1.pop(1))
+    pista_h1.insert(4 , pista_h1.pop(2))
+
+
+    # for x in pista_h1:
+    #     print(f'{x.get_attribute("time")} {x.get_attribute("columna")}')
+
+
+    print("cambiar lineas--- %s seconds ---" % (time.time() - start_time))
 
 # ir mirando y reservar la libre
+    start_time = time.time()
 
     for x in pista_h1:
         try:
@@ -141,14 +174,22 @@ def main():
         finally:  # ejecutar siempre
             print(f'\nFINAL')
 
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    start_time = time.time()
+
     print(driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_LabelEspacio').text)
     print(driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_LabelHorario').text)
     print(driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_LabelFecha').text)
     print(driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_LabelPrecio').text)
 
+    print("impresion--- %s seconds ---" % (time.time() - start_time))
+
 # reserva final
-#     driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_CheckBoxAceptoCondicionesLegales').click()
-#     driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_ButtonPagoSaldo').click()
+
+    # driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_CheckBoxAceptoCondicionesLegales').click()
+    # driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_ButtonPagoSaldo').click()
+
 
 
     finish = datetime.datetime.now() - start
@@ -157,6 +198,7 @@ def main():
     print(min_seconds(finish))
     print(min_seconds(finish2))
     driver.quit()
+
 
 
 if __name__ == "__main__":
