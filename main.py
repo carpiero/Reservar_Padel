@@ -18,6 +18,7 @@ def min_seconds(td):
   return f'Time:\n{minutes[0]} minutes, {minutes[1]} seconds'
 
 def main():
+    ahora=time.time()
     print(f'\n\nStar: {datetime.datetime.now().strftime("%H:%M:%S")}\n\n')
     start = datetime.datetime.now()
 
@@ -56,11 +57,19 @@ def main():
 
     ########### HORARIO
 
-    # time.sleep(40)
+    # today = datetime.datetime.now()
+    # tomorrow = today + datetime.timedelta(days=1)
+    # tomorrow = tomorrow.replace(hour=0, minute=0, second=0)
+    # dif = (tomorrow - today).seconds
+
+    # today2 = today.replace(hour=10, minute=29, second=0)
+    # dif = (today2 - today).seconds
+
+    # time.sleep(dif)
 
     dia = 'martes'
-    h1 = '19:00'
-    h2 = '19:30'
+    h1 = '11:00'
+    h2 = '11:30'
 
     #########################
 
@@ -130,7 +139,7 @@ def main():
 
 
 # pistas 1, 2 y 3 primero de distinto horario
-#     start_time2 = time.time()
+    start_time = time.time()
     # LLUVIA
 
     pista_h1.insert(11 , pista_h1.pop(7))
