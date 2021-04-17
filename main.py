@@ -57,19 +57,21 @@ def main():
 
     ########### HORARIO
 
-    # today = datetime.datetime.now()
+    today = datetime.datetime.now()
+
+    # today2 = today.replace(hour=12, minute=58, second=0)
+    # dif = (today2 - today).seconds
+
+
     # tomorrow = today + datetime.timedelta(days=1)
     # tomorrow = tomorrow.replace(hour=0, minute=0, second=0)
     # dif = (tomorrow - today).seconds
 
-    # today2 = today.replace(hour=10, minute=29, second=0)
-    # dif = (today2 - today).seconds
-
     # time.sleep(dif)
 
-    dia = 'martes'
-    h1 = '11:00'
-    h2 = '11:30'
+    dia = 'sábado'
+    h1 = '19:30'
+    h2 = '20:00'
 
     #########################
 
@@ -99,30 +101,49 @@ def main():
         manana.click()
 
     print(fecha.get_property("value"))
-    cuerpotabla = driver.find_element_by_id('CuerpoTabla')
-    print(cuerpotabla.get_attribute("time"))
-
     print("click dias--- %s seconds ---" % (time.time() - start_time))
 
     start_time = time.time()
+
+    cuerpotabla = driver.find_element_by_id('CuerpoTabla')
+    print(cuerpotabla.get_attribute("time"))
+    print("cuerpo tabla--- %s seconds ---" % (time.time() - start_time))
+
+
+
 # coger los horarios que queremos
     reser = driver.find_elements_by_class_name('subDivision.plantilla.buttonHora')
 
-    # pista_h1 = []
+    # start_time = time.time()
     #
-    # for x in reser:
-    #     if x.get_attribute("time") == h1:
-    #         pista_h1.append(x)
+    # pista_h1 = [x for x in reser if (x.get_attribute("time") == h1 or x.get_attribute("time") == h2) \
+    #                                           and (x.get_attribute("columna")=='2' or x.get_attribute("columna")=='3')]
     #
-    # for x in reser:
-    #     if x.get_attribute("time") == h2:
-    #         pista_h1.append(x)
+    # print("foor01--- %s seconds ---" % (time.time() - start_time))
 
-    pista_h1 = [x for x in reser if x.get_attribute("time") == h1 or x.get_attribute("time") == h2]
+    # start_time = time.time()
+    #
+    # pista_h1 = [x for x in reser if x.get_attribute("time") == h1 or x.get_attribute("time") == h2]
+    #
+    # print("foor02--- %s seconds ---" % (time.time() - start_time))
 
-    # pista_h1 = list(filter(lambda x: x.get_attribute("time") == h1 or x.get_attribute("time") == h2 , reser))
+    start_time = time.time()
 
-    print("foor--- %s seconds ---" % (time.time() - start_time))
+    pista_h1 = [x for x in reser if x.get_attribute("time") == h1]
+
+    print("foor03--- %s seconds ---" % (time.time() - start_time))
+
+    # start_time = time.time()
+    #
+    # # pista_h1=[]
+    # # for x in reser:
+    # #     if len(pista_h1)<6:
+    # #         if x.get_attribute("time") == h1:
+    # #             pista_h1.append(x)
+    # #     else:
+    # #         break
+    #
+    # print("foor04--- %s seconds ---" % (time.time() - start_time))
 
 # primero h1 pistas 4, 5 y 6 y luego h2 pistas 4, 5 y 6 primero.
 
@@ -139,22 +160,22 @@ def main():
 
 
 # pistas 1, 2 y 3 primero de distinto horario
-    start_time = time.time()
+#     start_time = time.time()
     # LLUVIA
 
-    pista_h1.insert(11 , pista_h1.pop(7))
-    pista_h1.insert(11 , pista_h1.pop(8))
-    pista_h1.insert(11 , pista_h1.pop(9))
+    pista_h1.insert(2, pista_h1.pop(0))
+    # pista_h1.insert(11 , pista_h1.pop(8))
+    # pista_h1.insert(11 , pista_h1.pop(9))
+    #
+    # pista_h1.insert(5 , pista_h1.pop(1))
+    # pista_h1.insert(4 , pista_h1.pop(2))
 
-    pista_h1.insert(5 , pista_h1.pop(1))
-    pista_h1.insert(4 , pista_h1.pop(2))
-
-
+    #
     # for x in pista_h1:
     #     print(f'{x.get_attribute("time")} {x.get_attribute("columna")}')
 
 
-    print("cambiar lineas--- %s seconds ---" % (time.time() - start_time))
+    # print("cambiar lineas--- %s seconds ---" % (time.time() - start_time))
 
 # ir mirando y reservar la libre
     start_time = time.time()
@@ -176,12 +197,8 @@ def main():
                 break
         except ElementClickInterceptedException:
             pass
-            print('ERROR')
             print(f'pista ocupada {x.get_attribute("time")} {x.get_attribute("columna")}')
 
-
-        finally:  # ejecutar siempre
-            print(f'\nFINAL')
 
     print("--- %s seconds ---" % (time.time() - start_time))
 
