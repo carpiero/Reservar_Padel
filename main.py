@@ -63,13 +63,15 @@ def main():
     # dif = (today2 - today).seconds
 
 
-    # tomorrow = today + datetime.timedelta(days=1)
-    # tomorrow = tomorrow.replace(hour=0, minute=0, second=0)
-    # dif = (tomorrow - today).seconds
+    tomorrow = today + datetime.timedelta(days=1)
+    tomorrow = tomorrow.replace(hour=0, minute=0, second=0)
+    dif = (tomorrow - today).seconds + 1
 
+    print(dif)
     # time.sleep(dif)
 
-    dia = 'sábado'
+
+    dia = 'martes'
     h1 = '19:30'
     h2 = '20:00'
 
@@ -190,14 +192,14 @@ def main():
             print(opt_text[0].text)
             if opt_text[0].text == 'Cerrar':
                 opt[0].click()
-                print(f'{x.get_attribute("time")} {x.get_attribute("columna")}')
+                print(f'\n\nPista ocupada {x.get_attribute("time")} {x.get_attribute("columna")}\n\n')
             else:
                 driver.find_element_by_id('terminos').click()
                 opt[0].click()
                 break
         except ElementClickInterceptedException:
             pass
-            print(f'pista ocupada {x.get_attribute("time")} {x.get_attribute("columna")}')
+            print(f'\n\nPista ocupada {x.get_attribute("time")} {x.get_attribute("columna")}\n\n')
 
 
     print("--- %s seconds ---" % (time.time() - start_time))
@@ -213,8 +215,8 @@ def main():
 
 # reserva final
 
-    # driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_CheckBoxAceptoCondicionesLegales').click()
-    # driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_ButtonPagoSaldo').click()
+    driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_CheckBoxAceptoCondicionesLegales').click()
+    driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_ButtonPagoSaldo').click()
 
 
 
