@@ -232,6 +232,7 @@ def main():
 
 # reserva final
 
+    WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, 'ctl00_ContentPlaceHolderContenido_ButtonPagoSaldo')))
     driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_CheckBoxAceptoCondicionesLegales').click()
     driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_ButtonPagoSaldo').click()
     WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, 'ctl00_ContentPlaceHolderContenido_ButtonConfirmar')))
