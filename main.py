@@ -23,7 +23,7 @@ def main():
     ahora=time.time()
     print(f'\n\nStar: {datetime.datetime.now().strftime("%H:%M:%S")}\n\n')
 
-    time.sleep(20)
+    # time.sleep(20)
 
     start = datetime.datetime.now()
 
@@ -56,6 +56,7 @@ def main():
     enter_button.click()
 
 # Dentro de panel usuario click en reservas en lateral izquierdo
+    WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, 'ctl00_ctl00_ContentPlaceHolderContenido_WUCMenuLateralIzquierdaIntranet_LabelMenuReservasBuscador')))
     rev_button = driver.find_element_by_id('ctl00_ctl00_ContentPlaceHolderContenido_WUCMenuLateralIzquierdaIntranet_LabelMenuReservasBuscador')
     rev_button.click()
 
@@ -64,7 +65,7 @@ def main():
 
 
     dia = 'miércoles'
-    h1 = '10:00'
+    h1 = '12:00'
     h2 = '20:00'
 
     #########################
@@ -87,9 +88,8 @@ def main():
     print(fecha.get_property("value"))
 
     print("click dias hasta el anterior--- %s seconds ---" % (time.time() - start_time))
-    start2 = datetime.datetime.now()
-    print(f'\n\nStar2: {datetime.datetime.now().strftime("%H:%M:%S")}\n\n')
-    start_time = time.time()
+
+
 
     today = datetime.datetime.now()
 
@@ -101,10 +101,14 @@ def main():
     dif = (tomorrow - today).seconds
 
     print(dif)
-    time.sleep(dif)
+    # time.sleep(dif)
 
-    manana.click()
-    print(fecha.get_property("value"))
+    start_time = time.time()
+    start2 = datetime.datetime.now()
+    print(f'\n\nStar2: {datetime.datetime.now().strftime("%H:%M:%S")}\n\n')
+
+    # manana.click()
+    # print(fecha.get_property("value"))
 
 
 
@@ -117,6 +121,7 @@ def main():
 
     start_time = time.time()
 
+    WebDriverWait(driver , 10).until(EC.element_to_be_clickable((By.ID , 'CuerpoTabla')))
     cuerpotabla = driver.find_element_by_id('CuerpoTabla')
     print(cuerpotabla.get_attribute("time"))
     print("cuerpo tabla--- %s seconds ---" % (time.time() - start_time))
@@ -142,6 +147,8 @@ def main():
     start_time = time.time()
 
     pista_h1 = [x for x in reser if x.get_attribute("time") == h1]
+
+    # print(pista_h1)
 
     print("foor03--- %s seconds ---" % (time.time() - start_time))
 
@@ -228,7 +235,7 @@ def main():
     driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_CheckBoxAceptoCondicionesLegales').click()
     driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_ButtonPagoSaldo').click()
     WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, 'ctl00_ContentPlaceHolderContenido_ButtonConfirmar')))
-    driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_ButtonConfirmar').click()
+    # driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_ButtonConfirmar').click()
 
 
     finish = datetime.datetime.now() - start
