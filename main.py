@@ -18,8 +18,13 @@ def min_seconds(td):
   return f'Time:\n{minutes[0]} minutes, {minutes[1]} seconds'
 
 def main():
+
+
     ahora=time.time()
     print(f'\n\nStar: {datetime.datetime.now().strftime("%H:%M:%S")}\n\n')
+
+    time.sleep(20)
+
     start = datetime.datetime.now()
 
     cfg = configparser.RawConfigParser()
@@ -57,28 +62,14 @@ def main():
 
     ########### HORARIO
 
-    today = datetime.datetime.now()
 
-    # today2 = today.replace(hour=12, minute=58, second=0)
-    # dif = (today2 - today).seconds
-
-
-    tomorrow = today + datetime.timedelta(days=1)
-    tomorrow = tomorrow.replace(hour=0, minute=0, second=0)
-    dif = (tomorrow - today).seconds + 1
-
-    print(dif)
-    # time.sleep(dif)
-
-
-    dia = 'martes'
-    h1 = '19:30'
+    dia = 'miércoles'
+    h1 = '10:00'
     h2 = '20:00'
 
     #########################
 
-    start2 = datetime.datetime.now()
-    print(f'\n\nStar2: {datetime.datetime.now().strftime("%H:%M:%S")}\n\n')
+
 
     start_time = time.time()
 
@@ -95,6 +86,25 @@ def main():
     manana.click()
     print(fecha.get_property("value"))
 
+    print("click dias hasta el anterior--- %s seconds ---" % (time.time() - start_time))
+    start2 = datetime.datetime.now()
+    print(f'\n\nStar2: {datetime.datetime.now().strftime("%H:%M:%S")}\n\n')
+    start_time = time.time()
+
+    today = datetime.datetime.now()
+
+    # today2 = today.replace(hour=10, minute=14, second=1)
+    # dif = (today2 - today).seconds
+
+    tomorrow = today + datetime.timedelta(days=1)
+    tomorrow = tomorrow.replace(hour=0, minute=0, second=1)
+    dif = (tomorrow - today).seconds
+
+    print(dif)
+    time.sleep(dif)
+
+    manana.click()
+    print(fecha.get_property("value"))
 
 
 
@@ -217,7 +227,8 @@ def main():
 
     driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_CheckBoxAceptoCondicionesLegales').click()
     driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_ButtonPagoSaldo').click()
-
+    WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, 'ctl00_ContentPlaceHolderContenido_ButtonConfirmar')))
+    driver.find_element_by_id('ctl00_ContentPlaceHolderContenido_ButtonConfirmar').click()
 
 
     finish = datetime.datetime.now() - start
