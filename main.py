@@ -64,8 +64,8 @@ def main():
     ########### HORARIO
 
 
-    dia = 'miércoles'
-    h1 = '12:00'
+    dia = 'jueves'
+    h1 = '17:00'
     h2 = '20:00'
 
     #########################
@@ -75,6 +75,7 @@ def main():
     start_time = time.time()
 
 # Mover hasta el martes siguiente
+    WebDriverWait(driver , 20).until(EC.element_to_be_clickable((By.ID , 'CuerpoTabla')))
     fecha = driver.find_element_by_id('fechaTabla')
     manana = driver.find_element_by_xpath('//*[@id="tablaReserva"]/div[2]/div[2]/div[1]/div[3]/input[3]')
     print(fecha.get_property("value"))
@@ -107,6 +108,7 @@ def main():
     start2 = datetime.datetime.now()
     print(f'\n\nStar2: {datetime.datetime.now().strftime("%H:%M:%S")}\n\n')
 
+    WebDriverWait(driver , 20).until(EC.element_to_be_clickable((By.ID , 'CuerpoTabla')))
     # manana.click()
     # print(fecha.get_property("value"))
 
@@ -121,7 +123,7 @@ def main():
 
     start_time = time.time()
 
-    WebDriverWait(driver , 10).until(EC.element_to_be_clickable((By.ID , 'CuerpoTabla')))
+    WebDriverWait(driver , 20).until(EC.element_to_be_clickable((By.ID , 'CuerpoTabla')))
     cuerpotabla = driver.find_element_by_id('CuerpoTabla')
     print(cuerpotabla.get_attribute("time"))
     print("cuerpo tabla--- %s seconds ---" % (time.time() - start_time))
@@ -201,11 +203,11 @@ def main():
 
     for x in pista_h1:
         try:
-            WebDriverWait(driver , 10).until(EC.element_to_be_clickable((By.ID , 'CuerpoTabla')))
+            WebDriverWait(driver , 20).until(EC.element_to_be_clickable((By.ID , 'CuerpoTabla')))
             x.click()
             opt = driver.find_elements_by_class_name('btnTiempo')
             opt_text = driver.find_elements_by_class_name('buttonHoraTxt')
-            WebDriverWait(driver , 10).until(EC.element_to_be_clickable((By.ID , 'reserva')))
+            WebDriverWait(driver , 20).until(EC.element_to_be_clickable((By.ID , 'reserva')))
             print(opt_text[0].text)
             if opt_text[0].text == 'Cerrar':
                 opt[0].click()
