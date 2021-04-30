@@ -28,7 +28,9 @@ def main():
     start = datetime.datetime.now()
 
     cfg = configparser.RawConfigParser()
-    cfg.read('/home/carpiero/ir/pass_projects/pass.ini')
+    # cfg.read('/home/carpiero/ir/pass_projects/pass.ini')
+    cfg.read('/Users/carlospinero/ir/pass_projects/pass.ini')
+
 
     u_padel = cfg['padel']['username']
     p_padel = cfg['padel']['password']
@@ -64,8 +66,8 @@ def main():
     ########### HORARIO
 
 
-    dia = 'jueves'
-    h1 = '17:00'
+    dia = 'viernes'
+    h1 = '13:00'
     h2 = '20:00'
 
     #########################
